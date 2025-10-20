@@ -13,6 +13,7 @@ CBuiltinDlg::CBuiltinDlg(QWidget *parent)
     pagePushButton = new QPushButton(QStringLiteral("頁面設定對話盒"));
     progressPushButton = new QPushButton(QStringLiteral("進度對話盒"));
     printPushButton = new QPushButton(QStringLiteral("列印對話盒"));
+    //
 }
 
 CBuiltinDlg::~CBuiltinDlg() {}
