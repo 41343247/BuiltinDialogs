@@ -14,6 +14,7 @@ CBuiltinDlg::CBuiltinDlg(QWidget *parent)
     progressPushButton = new QPushButton(QStringLiteral("進度對話盒"));
     printPushButton = new QPushButton(QStringLiteral("列印對話盒"));
     //
+    //
 }
 
 CBuiltinDlg::~CBuiltinDlg() {}
