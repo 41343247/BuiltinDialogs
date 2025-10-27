@@ -20,6 +20,7 @@ CBuiltinDlg::CBuiltinDlg(QWidget *parent)
     pagePushButton = new QPushButton(QStringLiteral("頁面設定對話盒"));
     progressPushButton = new QPushButton(QStringLiteral("進度對話盒"));
     printPushButton = new QPushButton(QStringLiteral("列印對話盒"));
+    textcolor = new QPushButton(QStringLiteral("設定文字顏色"));
 
     gridLayout->addWidget(colorPushButton,0,0,1,1);
     gridLayout->addWidget(errorPushButton,0,1,1,1);
@@ -30,6 +31,7 @@ CBuiltinDlg::CBuiltinDlg(QWidget *parent)
     gridLayout->addWidget(progressPushButton,2,0,1,1);
     gridLayout->addWidget(printPushButton,2,1,1,1);
     gridLayout->addWidget(displayTextEdit,3,0,3,3);
+    gridLayout->addWidget(textcolor,2,2,1,1);
 
     setLayout(gridLayout);
     setWindowTitle(QStringLiteral("內建對話盒展示"));
@@ -43,6 +45,7 @@ CBuiltinDlg::CBuiltinDlg(QWidget *parent)
     connect(pagePushButton,SIGNAL(clicked()),this,SLOT(doPushBtn()));
     connect(progressPushButton,SIGNAL(clicked()),this,SLOT(doPushBtn()));
     connect(printPushButton,SIGNAL(clicked()),this,SLOT(doPushBtn()));
+    connect(textcolor,SIGNAL(clicked()),this,SLOT(doTextcolor()));
 }
 
 CBuiltinDlg::~CBuiltinDlg() {}
@@ -104,5 +107,17 @@ void CBuiltinDlg::doPushBtn(){
         QPrinter printer(QPrinter::HighResolution);
         QPrintDialog dialog(&printer,this);
         if(dialog.exec()!=QDialog::Accepted)return;
+    }
+}
+void CBuiltinDlg::doTextcolor(){
+    QPushButton* btn=qobject_cast<QPushButton*>(sender());
+    if(btn==textcolor){
+        QPalette palette=displayTextEdit->palette();
+        const QColor& color=
+            QColorDialog::getColor(palette.color(QPalette::Text),this,QStringLiteral("設定背景顏色"));
+        if(color.isValid()){
+            palette.setColor(QPalette::Text,color);
+            displayTextEdit->setPalette(palette);
+        }
     }
 }
